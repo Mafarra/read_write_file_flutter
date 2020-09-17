@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
       appBar: new AppBar(
         title: new Text("IO - Read Write"),
         centerTitle: true,
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.cyan,
       ),
       body: new Container(
         padding: const EdgeInsets.all(13.5),
