@@ -34,23 +34,25 @@ class _HomeState extends State<Home> {
             decoration: new InputDecoration(labelText: "Write Something"),
           ),
           subtitle: new FlatButton(
-            onPressed:(){
+            onPressed: () {
               //if statement
               writeData(_enterDataField.text);
             },
             child: new Column(
               children: <Widget>[
                 new Text('Save Data'),
-                new Padding(padding: new EdgeInsets.all(15.0),),
+                new Padding(
+                  padding: new EdgeInsets.all(15.0),
+                ),
                 new FutureBuilder(
                   future: readData(),
-                  builder: (BuildContext context, AsyncSnapshot<String> data){
-                    if(data.hasData != null){
-                      return new Text(data.data.toString(),
-                        style: new TextStyle(
-                            color: Colors.red
-                        ),);
-                    }else{
+                  builder: (BuildContext context, AsyncSnapshot<String> data) {
+                    if (data.hasData != null) {
+                      return new Text(
+                        data.data.toString(),
+                        style: new TextStyle(color: Colors.red),
+                      );
+                    } else {
                       return new Text("There is not saved data");
                     }
                   },
