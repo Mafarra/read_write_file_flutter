@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -20,40 +19,40 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text("IO - Read Write"),
+      appBar: AppBar(
+        title: Text("IO - Read Write"),
         centerTitle: true,
         backgroundColor: Colors.cyan,
       ),
-      body: new Container(
+      body: Container(
         padding: const EdgeInsets.all(13.5),
         alignment: Alignment.topCenter,
-        child: new ListTile(
-          title: new TextField(
+        child: ListTile(
+          title: TextField(
             controller: _enterDataField,
-            decoration: new InputDecoration(labelText: "Write Something"),
+            decoration: InputDecoration(labelText: "Write Something"),
           ),
-          subtitle: new FlatButton(
+          subtitle: FlatButton(
             onPressed: () {
               //if statement
               writeData(_enterDataField.text);
             },
-            child: new Column(
+            child: Column(
               children: <Widget>[
-                new Text('Save Data'),
-                new Padding(
-                  padding: new EdgeInsets.all(15.0),
+                Text('Save Data'),
+                Padding(
+                  padding: EdgeInsets.all(15.0),
                 ),
-                new FutureBuilder(
+                FutureBuilder(
                   future: readData(),
                   builder: (BuildContext context, AsyncSnapshot<String> data) {
                     if (data.hasData != null) {
-                      return new Text(
+                      return Text(
                         data.data.toString(),
-                        style: new TextStyle(color: Colors.red),
+                        style: TextStyle(color: Colors.red),
                       );
                     } else {
-                      return new Text("There is not saved data");
+                      return Text("There is not saved data");
                     }
                   },
                 )
@@ -71,9 +70,19 @@ Future<String> get _localPath async {
   return directory.path; //home/directory/document
 }
 
+Future<String> get _llocalpath async {
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
+}
+
+Future<File> get _llocalFile async {
+  final path = await _llocalpath;
+  return File('$path/data.txt');
+}
+
 Future<File> get _localFile async {
   final path = await _localPath;
-  return new File('$path/data.txt');
+  return File('$path/data.txt');
 }
 
 Future<File> writeData(String message) async {
